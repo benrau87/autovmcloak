@@ -127,6 +127,8 @@ sleep 5
 #--hwvirt
 vmcloak init --$distro --vm-visible --cuckoo /etc/cuckoo-modified/utils/machine.py --ramsize $ram --cpus $cpu --ip $ipaddress --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
 error_check 'Created VMs'
+
+echo -e "${YELLOW}Installing adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on the VM${NC}"
 vmcloak install $name adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 &>> $logfile
 error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'
 

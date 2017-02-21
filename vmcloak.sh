@@ -72,10 +72,7 @@ fi
 ############################################################################################################################
 ############################################################################################################################
 ############################################################################################################################
-echo -e "${YELLOW}What is the name of the account used to run Cuckoo?${NC}"
-read cuser
 
-usermod -a -G vboxusers $cuser
 print_status "${YELLOW}Installing genisoimage${NC}"
 apt-get install mkisofs genisoimage -y &>> $logfile
 error_check 'Genisoimage installed'

@@ -153,7 +153,7 @@ error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips on VMs'
 
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  
-vmcloak snapshot $name vmcloak &>> $logfile
+vmcloak snapshot $name $name &>> $logfile
 error_check 'Created snapshot'
 
 echo -e "${YELLOW}Running some cleanup...Please wait.${NC}"  

@@ -68,19 +68,23 @@ fi
 
 }
 
-echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
+echo -e "${YELLOW}What is your cuckoo user account name?${NC}" &>> $logfile
 read user
 
 
-apt-get install mkisofs genisoimage -y
-sudo mkdir -p /mnt/windows_ISOs
+apt-get install mkisofs genisoimage -y &>> $logfile
+sudo mkdir -p /mnt/windows_ISOs &>> $logfile
 ##VMCloak
 echo
-read -n 1 -s -p "Please place your Windows ISO in the folder under /mnt/windows_ISOs and press any key to continue"
+read -n 1 -s -p "Please place your Windows ISO(s) in the folder under /mnt/windows_ISOs and press any key to continue"
 echo
 
-pip install vmcloak --upgrade
-mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/
+pip install vmcloak --upgrade &>> $logfile
+error_check 'PIP install of vmcloak'
+
+mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/ &>> $logfile
+error_check 'Mounted all ISOs'
+
 echo -e "${YELLOW}What is the Windows disto?"
 read distro
 echo -e "${YELLOW}What is the IP  address?"
@@ -95,8 +99,10 @@ echo -e "${YELLOW}###################################${NC}"
 echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
 echo
 sleep 5
-vmcloak init --vm-visible --hwvirt --ramsize 2048  --$distro --serial-key $key --iso-mount /mnt/windows_ISOs/ $name
-vmcloak install $name adobe9 wic pillow dotnet40 java7
+vmcloak init --vm-visible --hwvirt --ramsize 2048  --$distro --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
+error_check 'Created VMs'
+vmcloak install $name adobe9 wic pillow dotnet40 java7 &>> $logfile
+error_check 'Installed adobe9 wic pillow dotnet40 java7 on VMs'
 
 
 echo
@@ -115,8 +121,8 @@ then
 fi
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  
-vmcloak snapshot $name vmcloak $ipaddress
-
+vmcloak snapshot $name vmcloak $ipaddress &>> $logfile
+error_check 'Created snapshots'
 
 
 chown -R $user:$user ~/.vmcloak

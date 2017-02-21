@@ -127,12 +127,6 @@ sleep 5
 #--hwvirt
 vmcloak init --$distro --vm-visible --ramsize $ram --cpus $cpu --ip $ipaddress --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
 error_check 'Created VMs'
-
-echo -e "${YELLOW}Installing adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on the VM${NC}"
-vmcloak install $name adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 &>> $logfile
-error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'
-
-
 echo
 read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -153,6 +147,12 @@ echo -e "${YELLOW}Installing Office 2007${NC}"
 vmcloak-install $name --vm-visible office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
 error_check 'Office 2007 installed'
 fi
+
+echo -e "${YELLOW}Installing adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on the VM${NC}"
+vmcloak install $name adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 &>> $logfile
+error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'
+
+vmcloak-modify --vm-visible $name
 
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  

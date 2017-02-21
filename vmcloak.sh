@@ -77,9 +77,8 @@ print_status "${YELLOW}Installing genisoimage${NC}"
 apt-get install mkisofs genisoimage -y &>> $logfile
 error_check 'Genisoimage installed'
 
-print_status "${YELLOW}Making ISO directory${NC}"
-sudo mkdir -p /mnt/windows_ISOs &>> $logfile
-##VMCloak
+dir_check /mnt/windows_ISOs &>> $logfile
+umount /mnt/windows_ISOs
 echo
 read -n 1 -s -p "Please place your Windows ISO in the folder under /mnt/windows_ISOs and press any key to continue"
 echo
@@ -100,7 +99,7 @@ VBoxManage hostonlyif create
 VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1
 fi
 
-print_status "${YELLOW}Mounting ISO${NC}"
+print_status "${YELLOW}Mounting ISO if needed${NC}"
 mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/ &>> $logfile
 error_check 'Mounted ISO'
 

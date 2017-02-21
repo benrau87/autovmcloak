@@ -146,7 +146,7 @@ echo -e "${YELLOW}Installing Office 2007${NC}"
 vmcloak install $name --vm-visible office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
 error_check 'Office 2007 installed'
 fi
-
+echo
 echo -e "${YELLOW}Installing adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on the VM${NC}"
 vmcloak install $name --vm-visible adobe9 wic pillow dotnet40 java7 removetooltips chrome &>> $logfile
 error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips on VMs'

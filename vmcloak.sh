@@ -121,7 +121,7 @@ read distro
 
 
 echo -e "${YELLOW}###################################${NC}"
-echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
+echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd really like...${NC}"
 echo
 sleep 5
 #--hwvirt

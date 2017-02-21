@@ -73,7 +73,7 @@ fi
 ############################################################################################################################
 ############################################################################################################################
 
-usermod -a -G vboxusers %LOGNAME
+usermod -a -G vboxusers $USER
 print_status "${YELLOW}Installing genisoimage${NC}"
 apt-get install mkisofs genisoimage -y &>> $logfile
 error_check 'Genisoimage installed'

@@ -152,9 +152,10 @@ echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC
 vmcloak snapshot $name vmcloak &>> $logfile
 error_check 'Created snapshot'
 
-
-chown -R cuckoo:cuckoo ~/.vmcloak
-
+echo -e "${YELLOW}Running some cleanup...Please wait.${NC}"  
+chown -R cuckoo:cuckoo ~/.vmcloak  &>> $logfile
+umount /mnt/windows_ISOs &>> $logfile
+umount /mnt/office2007 &>> $logfile
 echo
 echo -e "${YELLOW}The VM is located under your current OR sudo user's home folder under .vmcloak, you will need to register this with Virtualbox on your cuckoo account.${NC}"  
 

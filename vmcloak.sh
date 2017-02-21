@@ -128,16 +128,23 @@ echo
 read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  echo
-  echo -e "${YELLOW}What is the path to the iso?${NC}"
-  read path
-  echo
-  echo -e "${YELLOW}What is the license key?${NC}"
-  read key
-  vmcloak install seven0 office2007 \
-    office2007.isopath=$path \
-    office2007.serialkey=$key
+dir_check /mnt/office2007 &>> $logfile
+umount /mnt/office2007 &>> $logfile
+
+echo
+read -n 1 -s -p "Please place your Office 2007 ISO in the folder under /mnt/office2007/ and press any key to continue"
+echo
+
+mount -o loop,ro  --source /mnt/office2007/*.iso --target /mnt/office2007/ &>> $logfile
+error_check 'ISO mounted'
+
+echo -e "${YELLOW}What is the license key?${NC}"
+read key
+echo -e "${YELLOW}Installing Office 2007${NC}"
+vmcloak-install $name office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
+error_check 'Office 2007 installed'
 fi
+
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  
 vmcloak snapshot $name vmcloak &>> $logfile

@@ -161,7 +161,7 @@ echo -e "${YELLOW}Running some cleanup...Please wait.${NC}"
 umount /mnt/windows_ISOs &>> $logfile
 umount /mnt/office2007 &>> $logfile
 
-sudo -u $cuser vmcloak-modify --vm-visible $name
+vmcloak-modify --vm-visible $name
 
 echo
 echo -e "${YELLOW}The VM is located under your current OR sudo user's home folder under .vmcloak, you will need to register this with Virtualbox on your cuckoo account.${NC}"  

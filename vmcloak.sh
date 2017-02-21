@@ -73,9 +73,6 @@ fi
 ############################################################################################################################
 ############################################################################################################################
 
-echo -e "${YELLOW}What is your cuckoo user account name?${NC}" &>> $logfile
-read user
-
 print_status "${YELLOW}Installing genisoimage${NC}"
 apt-get install mkisofs genisoimage -y &>> $logfile
 error_check 'Genisoimage installed'
@@ -109,11 +106,11 @@ error_check 'Mounted ISO'
 
 #echo -e "${YELLOW}What is the Windows disto?"
 #read distro
-echo -e "${YELLOW}What is the IP  address?"
+echo -e "${YELLOW}What is the IP  address?${NC}"
 read ipaddress
-echo -e "${YELLOW}What is the name for this machine?"
+echo -e "${YELLOW}What is the name for this machine?${NC}"
 read name
-echo -e "${YELLOW}What is the key?"
+echo -e "${YELLOW}What is the key?${NC}"
 read key
 
 
@@ -121,7 +118,8 @@ echo -e "${YELLOW}###################################${NC}"
 echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
 echo
 sleep 5
-vmcloak init --vm-visible --hwvirt --ramsize 2048 –cpus 2 --hostonly-ip $ipaddress --serial-key $key --cuckoo /etc/cuckoo-modified/utils/machine.py --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
+#--hwvirt
+vmcloak init --vm-visible --ramsize 2048 –cpus 2 --hostonly-ip $ipaddress --serial-key $key --cuckoo /etc/cuckoo-modified/utils/machine.py --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
 error_check 'Created VMs'
 vmcloak install $name adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 &>> $logfile
 error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'
@@ -147,7 +145,7 @@ vmcloak snapshot $name vmcloak &>> $logfile
 error_check 'Created snapshot'
 
 
-chown -R $user:$user ~/.vmcloak
+chown -R cuckoo:cuckoo ~/.vmcloak
 
 echo
 echo -e "${YELLOW}The VM is located under your current OR sudo user's home folder under .vmcloak, you will need to register this with Virtualbox on your cuckoo account.${NC}"  

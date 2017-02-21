@@ -148,8 +148,8 @@ error_check 'Office 2007 installed'
 fi
 
 echo -e "${YELLOW}Installing adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on the VM${NC}"
-vmcloak install $name --vm-visible adobe9 wic pillow dotnet40 java7 removetooltips chrome firefox_41 &>> $logfile
-error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'
+vmcloak install $name --vm-visible adobe9 wic pillow dotnet40 java7 removetooltips &>> $logfile
+error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips on VMs'
 
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  

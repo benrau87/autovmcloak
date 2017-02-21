@@ -120,7 +120,7 @@ echo -e "${YELLOW}This process will take some time, you should get a sandwich, o
 echo
 sleep 5
 #--hwvirt
-vmcloak init --$distro --vm-visible --ramsize 2048 –cpus 2 -ip $ipaddress --serial-key $key --cuckoo /etc/cuckoo-modified/utils/machine.py --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
+vmcloak init --$distro --vm-visible --ramsize 2048 –-cpus 2 --ip $ipaddress --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
 error_check 'Created VMs'
 vmcloak install $name adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 &>> $logfile
 error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_cleanup chrome firefox_41 on VMs'

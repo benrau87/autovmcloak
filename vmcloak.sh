@@ -1,8 +1,8 @@
 #!/bin/bash
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit 1
-fi
+#if [ "$EUID" -ne 0 ]
+#  then echo "Please run as root"
+ # exit 1
+#fi
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'

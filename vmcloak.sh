@@ -105,7 +105,7 @@ error_check 'Mounted ISO'
 
 #echo -e "${YELLOW}What is the Windows disto?"
 #read distro
-echo -e "${YELLOW}What is the IP  address?${NC}"
+echo -e "${YELLOW}What is the IP  address you would like to assign this machine? (192.168.56.x)${NC}"
 read ipaddress
 echo -e "${YELLOW}What is the name for this machine?${NC}"
 read name

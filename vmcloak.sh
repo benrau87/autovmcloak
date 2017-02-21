@@ -127,7 +127,7 @@ echo -e "${YELLOW}This process will take some time, you should get a sandwich, o
 echo
 sleep 5
 #--hwvirt
-sudo -u $cuser vmcloak init --$distro --vm-visible --ramsize $ram --cpus $cpu --ip $ipaddress --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
+vmcloak init --$distro --vm-visible --ramsize $ram --cpus $cpu --ip $ipaddress --serial-key $key --iso-mount /mnt/windows_ISOs/ $name &>> $logfile
 error_check 'Created VMs'
 echo
 read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
@@ -146,7 +146,7 @@ error_check 'ISO mounted'
 echo -e "${YELLOW}What is the license key?${NC}"
 read key
 echo -e "${YELLOW}Installing Office 2007${NC}"
-sudo -u $cuser vmcloak-install $name --vm-visible office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
+vmcloak-install $name --vm-visible office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
 error_check 'Office 2007 installed'
 fi
 
@@ -156,11 +156,11 @@ error_check 'Installed adobe9 wic pillow dotnet40 java7 removetooltips windows_c
 
 echo
 echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  
-sudo -u $cuser vmcloak snapshot $name vmcloak &>> $logfile
+vmcloak snapshot $name vmcloak &>> $logfile
 error_check 'Created snapshot'
 
 echo -e "${YELLOW}Running some cleanup...Please wait.${NC}"  
-chown -R cuckoo:cuckoo ~/.vmcloak  &>> $logfile
+
 umount /mnt/windows_ISOs &>> $logfile
 umount /mnt/office2007 &>> $logfile
 

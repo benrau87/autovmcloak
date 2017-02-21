@@ -150,7 +150,7 @@ error_check 'ISO mounted'
 echo -e "${YELLOW}What is the license key?${NC}"
 read key
 echo -e "${YELLOW}Installing Office 2007${NC}"
-vmcloak-install $name office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
+vmcloak-install $name --vm-visible office2007 office2007.isopath=/mnt/office2007.iso office2007.serialkey=$key &>> $logfile
 error_check 'Office 2007 installed'
 fi
 
